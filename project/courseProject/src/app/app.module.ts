@@ -17,7 +17,7 @@ import * as fromApp from "./store/app.reducer";
     HeaderComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutesModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducer),
