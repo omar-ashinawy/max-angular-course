@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+        <div formGroupName="userData">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            formControlName="username">
+          <span class="help-block" *ngIf="loginForm.get('userData.username').invalid && loginForm.get('userData.username').touched">
+            <span *ngIf="loginForm.get('userData.username').errors['required']">Please enter a username!</span>
+            <span *ngIf="loginForm.get('userData.username').errors['NameIsForbidden']">Please enter a valid username!</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="email">email</label>
+          <input
+            type="text"
+            id="email"
+            class="form-control"
+            formControlName="email">
+          <span class="help-block" *ngIf="loginForm.get('userData.email').invalid && loginForm.get('userData.email').touched">
+            <span *ngIf="loginForm.get('userData.email').errors['EmailIsForbidden']">This email is forbidden!</span>
+            <span *ngIf="loginForm.get('userData.email').errors['email']">Please enter a valid email</span>
+          </span>
+        </div>
+        </div>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input
+              type="radio"
+              [value]="gender"
+              formControlName="gender">{{ gender }}
+          </label>
+        </div>
+        <div formArrayName="hobbies">
+          <h3>Your hobbies</h3>
+          <button type="button" class="btn btn-default" (click)="onAddHobbies()">Add Hobby</button>
+          <div *ngFor="let hobbyControl of getControls(); let i = index" class="form-group">
+            <input type="text" class="form-control" [formControlName]="i">
+          </div>
+        </div>
+        <p class="help-block" *ngIf="loginForm.invalid && loginForm.touched">
+          Please enter valid data!</p>
+        <button class="btn btn-primary" type="submit" [disabled] = "loginForm.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

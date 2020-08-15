@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button
+        class="btn btn-primary"
+        (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
+      <br><br>
+      <ul class="list-group">
+        <div *ngIf="onlyOdd">
+          <li class="list-group-item" *ngFor="let odd of oddNumbers"
+              [ngStyle]="{backgroundColor: odd % 2 !== 0 ? 'transparent':'yellow'}">
+             {{odd}}
+           </li>
+        </div>
+
+
+<!--        <div *ngIf="!onlyOdd">-->
+<!--          <li class="list-group-item" *ngFor="let even of evenNumbers"-->
+<!--              [ngStyle]="{backgroundColor: even % 2 === 0 ? 'yellow':'transparent'}">-->
+<!--           {{even}}-->
+<!--          </li>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;The template below is what we get when calling a structural directive, with a normal (without *) property binding to the directive name if it is the main property &ndash;&gt;-->
+<!--        <ng-template [ngIf]="!onlyOdd">-->
+<!--          <div>-->
+<!--            <li class="list-group-item" *ngFor="let even of evenNumbers"-->
+<!--                [ngStyle]="{backgroundColor: even % 2 === 0 ? 'yellow':'transparent'}">-->
+<!--              {{even}}-->
+<!--            </li>-->
+<!--          </div>-->
+<!--        </ng-template>-->
+
+        <div *appUnless="onlyOdd">
+          <li class="list-group-item" *ngFor="let even of evenNumbers"
+              [ngStyle]="{backgroundColor: even % 2 === 0 ? 'yellow':'transparent'}">
+            {{even}} from appUnless directive!!
+          </li>
+        </div>
+      </ul>
+<!--      <ng-template [ngIf]="onlyOdd">-->
+<!--        <p>Only odd</p>-->
+<!--      </ng-template>-->
+      <p appBasicHighlight class="try">Style Here</p>
+<!-- //Directives can also have their custom property bindings like components!  -->
+      <p [appBetterHighlight]="'red'" [defaultColor]="'transparent'" >Style Here with red better!</p>
+      <!-- Above we have bound the directive name with the property we want to be the default bindable property which highlight color -->
+    </div>
+  </div>
+</div>

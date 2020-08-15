@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="secretDisplayed = !secretDisplayed; logged()">Display Details</button>
+      <hr>
+      <p *ngIf="secretDisplayed">Secret Password = tuna</p>
+      <p *ngFor="let log of logs; let i = index"
+         [ngStyle]="{backgroundColor: i >= 4? 'blue':'transparent'}"
+         [ngClass]="{'white-text': i >= 4}">{{log}}</p>
+    </div>
+  </div>
+</div>

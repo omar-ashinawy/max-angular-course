@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #form = 'ngForm'>
+        <div id="user-data" ngModelGroup="userData" #userData='ngModelGroup'>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" name="userName" ngModel required>
+          </div>
+          <button class="btn btn-default" type="button" (click)="suggestUserName()">Suggest an Username</button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input type="email" id="email" class="form-control" name="userEmail" ngModel required email #email='ngModel'> <!-- email is a special marker used by angular to assure that the form requires a valid email to be submitted. -->
+            <p *ngIf="email.invalid && email.touched" class="help-block">Please Enter a Valid Email!</p>
+          </div>
+        </div>
+        <p *ngIf="userData.invalid && userData.touched">Please enter valid user data!</p>
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select id="secret" class="form-control" name="secret" ngModel>
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea name="secretAnswer" rows="3" class="form-control" [(ngModel)]="secretAnswer"></textarea>
+          <hr>
+          <p>Your answer: {{secretAnswer}}</p>
+        </div>
+        <div class="form-group">
+          <div class="radio" *ngFor="let gender of genders; let i = index" >
+            <label><input type="radio" name="gender" [value]="gender" [ngModel]="'Male'" required> {{ gender }}</label>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+  <hr *ngIf="submitted">
+  <div class="row" *ngIf="submitted">
+    <div class="col-xs-12">
+      <h2 class="panel-heading">Your Data</h2>
+      <p>Your Name: {{user.userName}}</p>
+      <p>Your Email: {{user.userEmail}}</p>
+      <p>Secret Question: Your first {{user.secretQuestion}}?</p>
+      <p>Answer: {{user.secretAnswer}}</p>
+      <p>Your Gender: {{user.gender}}</p>
+    </div>
+  </div>
+</div>

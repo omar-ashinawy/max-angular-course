@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <label for="cri">Criteria</label>
+      <input type="text" id="cri" [(ngModel)]="criteria" class="form-control">
+      <label for="status">Value to Show</label>
+      <input type="text" id="status" [(ngModel)]="filteredStatus" class="form-control">
+      <br><br>
+      <h2>App Status: {{appStatusString}}</h2>
+<!--<br>-->
+      <h2>App Status Promise: {{appStatus | async}}</h2>
+      <hr>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let server of servers | filter:filteredStatus:criteria"
+          [ngClass]="getStatusClasses(server)">
+          <span
+            class="badge">
+            {{ server.status }}
+          </span>
+          <strong>{{ server.name | stretch }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date:'fullDate' | uppercase}}
+          <!-- Watch out ! Order of pipes matters !-->
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

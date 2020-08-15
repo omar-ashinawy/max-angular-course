@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-5">
+    <app-recipe-list></app-recipe-list>
+  </div>
+  <div class="col-md-7">
+<!--    <app-recipe-detail *ngIf="arrivedFinalRecipe; else infoText"-->
+<!--                       [recipeToView]="arrivedFinalRecipe"></app-recipe-detail>-->
+<!--    <ng-template #infoText>Please Select a Recipe!</ng-template>-->
+    <router-outlet></router-outlet>
+  </div>
+</div>
